@@ -36,3 +36,13 @@ Spe_N1616_Input|
 - 清理前回归测试按预期失败（4 个待删除入口仍在）；清理后自测 SELFTEST_OK，退出码 0，注册命令 16 个（14 MES + 2 IO）。
 - 实际发布 EXE 的 TCP 60000 已验证：4 个删除的命令与未知命令回 -888，Spe_MES_Init 回 1；测试程序已关闭。
 - 无实卡和现场 MES 网络，真实 IO 与 MES 往返未验。不得视为产线验收，不含 PPV/Oracle，也未迁移 PLC、VISA、串口等外围。
+
+## VS2022 编译与源码
+
+现版 v1.0.1 已使用 **VS2022 Community 17.14.23 自带 MSBuild 17.14.23.42201 + .NET SDK9.0.308** 实际 Rebuild 成功（退出码0），生成程序 `--selftest` 输出 SELFTEST_OK。目标仍为 net8.0-windows / win-x86；不是仅凭 dotnet build 推测兼容。
+
+- 源码位于 [src/TcpServerDmmLite.sln](src/TcpServerDmmLite.sln)，打开后选择 Release / x86 并还原 NuGet。
+- [下载可编译源码ZIP](https://github.com/DDZ-K/tcp-server-dmm-lite/releases/download/v1.0.1/TcpServerDmmLite-v1.0.1-Source-VS2022.zip)
+- [编译说明与实际命令](docs/VS2022.md)
+- 为避免公开厂内报文，源码不附 MES XML 模板及历史响应；编译和 IO 不依赖模板。需要 MES 时，从已有运行包复制 Templates 或使用现场批准模板，配置实际地址。
+- 源码默认 MES 地址已改为 localhost，原本机工程与发布包配置未改。官方 SDK DLL 随源码保持引用，驱动及 VC++2010 x86 仍需另装；厂商组件保留其原有许可，不代表开源授权。
