@@ -48,8 +48,7 @@ public String MES_Server, scannerIP, partReceivedSent, partProcessedSent, change
                 paraMandatory = StrToStrArray(barcode, '@');
             else
                 paraMandatory = new string[] { barcode };
-            barcodeHous = paraMandatory[0].Trim(new char[] { '\n', '
-','\0' });
+            barcodeHous = paraMandatory[0].Trim(new char[] { '\n', '\r','\0' });
 
             if (paraMandatory.Length == 3)
             {
@@ -87,8 +86,7 @@ public String MES_Server, scannerIP, partReceivedSent, partProcessedSent, change
             }
 
 
-            telegramPath = dictMES["telegramPath"]+"\\"+ path.Trim(new char[] { '\n', '
-' });
+            telegramPath = dictMES["telegramPath"]+"\\"+ path.Trim(new char[] { '\n', '\r' });
             tcpClient = new TcpClient();
 
             sr = new StreamReader("Templates\\"+ path + "\\Request_partReceived.xml");
